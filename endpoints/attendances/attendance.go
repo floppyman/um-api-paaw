@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/umbrella-sh/um-api-paaw/base"
-	"github.com/umbrella-sh/um-common/sqls"
+	"github.com/umbrella-sh/um-common/web"
 )
 
 func (re AttendanceEndPoint) List(startTime time.Time, endTime time.Time, includePending bool, limit int, offset int) (bool, error, AttendanceListResponse) {
@@ -22,7 +22,7 @@ func (re AttendanceEndPoint) List(startTime time.Time, endTime time.Time, includ
 		offset = 0
 	}
 
-	qs := sqls.QueryStringBuilder(map[string]string{
+	qs := web.QueryStringBuilder(map[string]string{
 		"start_time":     startTime.Format("2006-01-02"),
 		"end_time":       endTime.Format("2006-01-02"),
 		"includePending": strconv.FormatBool(includePending),
