@@ -8,8 +8,8 @@ import (
 	"io"
 	"net/http"
 	"time"
-
-	"github.com/umbrella-sh/um-common/logging/ulog"
+	
+	"github.com/floppyman/um-common/logging/ulog"
 )
 
 var Options PaawOptions
@@ -49,7 +49,7 @@ func ValidateOrGetToken() (bool, error) {
 		// token is good, continue
 		return true, nil
 	}
-
+	
 	bodyBytes, err := json.Marshal(authRequestOptions{
 		ClientId:     Options.ApiClientId,
 		ClientSecret: Options.ApiClientSecret,
@@ -61,18 +61,18 @@ func ValidateOrGetToken() (bool, error) {
 	if req == nil {
 		return false, errors.New("create auth request failed")
 	}
-
+	
 	suc, resBytes, err1 := DoRequest(req)
 	if !suc || err1 != nil {
 		return false, err1
 	}
-
+	
 	var res authResponseOptions
 	suc1, err2 := UnpackBody(resBytes, &res)
 	if !suc1 || err2 != nil {
 		return false, err2
 	}
-
+	
 	KnownToken = res.Data.Token
 	KnownTokenExpires = time.Now().Add(time.Duration(res.Data.ExpiresIn) * time.Second)
 	return true, nil
@@ -81,47 +81,47 @@ func ValidateOrGetToken() (bool, error) {
 func CreateRequest(method HttpMethod, urlPath string, body []byte, requiresToken bool) *http.Request {
 	fullUrl := fmt.Sprintf("%s%s", Options.ApiUrl, urlPath)
 	ulog.Console.Debug().Msgf("PAAW Url: %s", fullUrl)
-
+	
 	var req *http.Request
 	var err error
-
+	
 	if method != HttpGet && body != nil && len(body) > 0 {
 		req, err = http.NewRequest(string(method), fullUrl, bytes.NewBuffer(body))
 	} else {
 		req, err = http.NewRequest(string(method), fullUrl, nil)
 	}
-
+	
 	if err != nil {
 		return nil
 	}
-
+	
 	if requiresToken {
 		req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", KnownToken))
 	}
 	if method != HttpGet {
 		req.Header.Add("Content-Type", "application/json")
 	}
-
+	
 	return req
 }
 
 func DoRequest(req *http.Request) (bool, []byte, error) {
 	client := &http.Client{}
-
+	
 	resp, err := client.Do(req)
 	if err != nil {
 		return false, nil, err
 	}
-
+	
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
 	}(resp.Body)
-
+	
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return false, nil, err
 	}
-
+	
 	return true, body, nil
 }
 
@@ -131,6 +131,6 @@ func UnpackBody(body []byte, res any) (bool, error) {
 		ulog.Console.Error().Str("body", string(body)).Msg("Invalid json")
 		return false, err
 	}
-
+	
 	return true, nil
 }

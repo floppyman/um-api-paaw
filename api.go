@@ -2,10 +2,10 @@ package paaw
 
 import (
 	"github.com/spf13/viper"
-
-	"github.com/umbrella-sh/um-api-paaw/base"
-	"github.com/umbrella-sh/um-api-paaw/endpoints/attendances"
-	"github.com/umbrella-sh/um-api-paaw/endpoints/roots"
+	
+	"github.com/floppyman/um-api-paaw/base"
+	"github.com/floppyman/um-api-paaw/endpoints/attendances"
+	"github.com/floppyman/um-api-paaw/endpoints/roots"
 )
 
 //goland:noinspection GoUnusedExportedFunction
