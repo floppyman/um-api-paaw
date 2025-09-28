@@ -3,7 +3,7 @@ module github.com/floppyman/um-api-paaw
 go 1.25
 
 require (
-	github.com/floppyman/um-common v1.2.8
+	github.com/floppyman/um-common v1.2.10
 	github.com/spf13/viper v1.21.0
 )
 

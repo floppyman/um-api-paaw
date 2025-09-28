@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"time"
 	
-	"github.com/floppyman/um-common/logging/ulog"
+	"github.com/floppyman/um-common/logging/logr"
 )
 
 var Options PaawOptions
@@ -80,7 +80,7 @@ func ValidateOrGetToken() (bool, error) {
 
 func CreateRequest(method HttpMethod, urlPath string, body []byte, requiresToken bool) *http.Request {
 	fullUrl := fmt.Sprintf("%s%s", Options.ApiUrl, urlPath)
-	ulog.Console.Debug().Msgf("PAAW Url: %s", fullUrl)
+	logr.Console.Debug().Msgf("PAAW Url: %s", fullUrl)
 	
 	var req *http.Request
 	var err error
@@ -128,7 +128,7 @@ func DoRequest(req *http.Request) (bool, []byte, error) {
 func UnpackBody(body []byte, res any) (bool, error) {
 	err := json.Unmarshal(body, &res)
 	if err != nil {
-		ulog.Console.Error().Str("body", string(body)).Msg("Invalid json")
+		logr.Console.Error().Str("body", string(body)).Msg("Invalid json")
 		return false, err
 	}
 	

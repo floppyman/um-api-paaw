@@ -4,6 +4,8 @@ github.com/floppyman/um-common v1.1.17 h1:MDeLM0IOfPkmvRQOtAhiXsjgzKRw5HNaPdiuyI
 github.com/floppyman/um-common v1.1.17/go.mod h1:EPDBF+d+hQ1Q19xAeNp5ruPjcgKLftF8SiIdskbBzc8=
 github.com/floppyman/um-common v1.2.8 h1:S9lS+fmc6Ev/oDm+grautNnw6BrSERnX+4FoTKKcIhw=
 github.com/floppyman/um-common v1.2.8/go.mod h1:bhkScdqd7meA/wEMhg3QZKca3vn9t03rKY89rS5ak0o=
+github.com/floppyman/um-common v1.2.10 h1:ENqYPk2o629qWhEiwo0RvH2EOY0mltaRGkq+k7LCEHs=
+github.com/floppyman/um-common v1.2.10/go.mod h1:gSqOgEnqAnZOqlRj0p6QMWgxVqY71AHRxJ8HLy+dZiY=
 github.com/frankban/quicktest v1.14.6 h1:7Xjx+VpznH+oBnejlPUj8oUpdxnVs4f8XU8WnHkI4W8=
 github.com/frankban/quicktest v1.14.6/go.mod h1:4ptaffx2x8+WTWXmUCuVU6aPUX1/Mz7zb5vbUoiM6w0=
 github.com/fsnotify/fsnotify v1.9.0 h1:2Ml+OJNzbYCTzsxtv8vKSFD9PbJjmhYF14k/jKC7S9k=
